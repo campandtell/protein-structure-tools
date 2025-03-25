@@ -92,7 +92,7 @@ def get_residue_groups(csv_path):
 
     # Group by "Residue Index" and take the max tier
     # (Ensure residue index is numeric and drop rows where residue_index is None)
-    df_filtered = df.dropna(subset=['Residue Index'])
+    df_filtered.loc[:, 'Residue Index'] = df_filtered['Residue Index'].astype(int)  # Correct way
     df_filtered['Residue Index'] = df_filtered['Residue Index'].astype(int)
 
     position_tiers = df_filtered.groupby('Residue Index')['Tier'].max()
